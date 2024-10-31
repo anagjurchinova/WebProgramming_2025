@@ -16,7 +16,7 @@
 
 <main>
     <h2>Choose an event:</h2>
-    <form method="post" action="">
+    <form method="post" action="/eventBooking">
         <h1>Search by name:</h1>
         <input type="text" name="searchedByName" th:value="${searchedByName}">
         <h1>Search by rating:</h1>
@@ -25,7 +25,7 @@
     </form>
 
     <h2>Event List:</h2>
-    <form method="post" action="">
+    <form method="post" action="/eventBooking">
         <div th:if="${eventList.size() == 0}">
             <p>No events found for the specified criteria.</p>
         </div>
