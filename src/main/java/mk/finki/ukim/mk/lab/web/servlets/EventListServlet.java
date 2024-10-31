@@ -57,39 +57,4 @@ public class EventListServlet extends HttpServlet {
         springTemplateEngine.process("listEvents.html", context, resp.getWriter());
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nameSearched = req.getParameter("searchedByName");
-        String ratingSearched = req.getParameter("searchedByRating");
-
-        if (nameSearched != null && !nameSearched.isEmpty()) {
-            req.getSession().setAttribute("searchedName", nameSearched);
-        }
-        if (ratingSearched != null && !ratingSearched.isEmpty()) {
-            req.getSession().setAttribute("searchedRating", ratingSearched);
-        }
-
-        String eventName = req.getParameter("eventName");
-        String attendee = req.getParameter("attendeeName");
-        int numTickets = 0;
-
-        if (req.getParameter("numTickets") != null && !req.getParameter("numTickets").isEmpty()) {
-            numTickets = Integer.parseInt(req.getParameter("numTickets"));
-        }
-
-        if (eventName != null && attendee != null && numTickets > 0) {
-            String clientIP = req.getRemoteAddr();
-            try {
-                EventBooking booking = eventBookingService.placeBooking(eventName, attendee, clientIP, numTickets);
-                req.getSession().setAttribute("eventBooking", booking);
-                resp.sendRedirect("/eventBooking");
-                return; // zatoa sto se naogja inside if statement, vo sprotivno server-side ke prodolzi da go execute ostanatiot kod
-
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-
-        resp.sendRedirect("/");
-    }
 }
