@@ -36,16 +36,6 @@ public class EventBookingServlet extends HttpServlet  {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nameSearched = req.getParameter("searchedByName");
-        String ratingSearched = req.getParameter("searchedByRating");
-
-        if (nameSearched != null && !nameSearched.isEmpty()) {
-            req.getSession().setAttribute("searchedName", nameSearched);
-        }
-        if (ratingSearched != null && !ratingSearched.isEmpty()) {
-            req.getSession().setAttribute("searchedRating", ratingSearched);
-        }
-
         String eventName = req.getParameter("eventName");
         String attendee = req.getParameter("attendeeName");
         int numTickets = 0;
